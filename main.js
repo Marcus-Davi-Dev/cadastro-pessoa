@@ -30,7 +30,13 @@ worker.onmessage = (message) => {
         pessoasCadastradas.innerHTML = "";
         pessoasCadastradas.style.display = "block";
         for (let i = 0; i < message.data.resultado.length; i++) {
-            const pessoa = message.data.resultado[i];
+            const pessoa = document.createElement("li");
+            const container = document.createElement("div");
+            container.innerHTML = `<b>${message.data.resultado[i].nome}</b> <span class='data-de-nascimento'>${message.data.resultado[i].dataDeNascimento}</span><br>
+                                   <p>Sexo: ${message.data.resultado[i].sexo}</p>
+                                   <p>Nacionalidade: ${message.data.resultado[i].nacionalidade}</p>
+                                   <p>${message.data.resultado[i].email}</p>`;
+            pessoa.appendChild(container);
             pessoasCadastradas.appendChild(pessoa);
         }
     } else if (!(message.data.tipo === "sucesso" || message.data.tipo === "no person" || message.data.tipo === "erro")) {
