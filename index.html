@@ -1,0 +1,210 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      font-family: Arial, Helvetica, sans-serif;
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      padding-top: 40px;
+      background-color: cornsilk;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgb(0, 200, 0);
+    }
+
+    header ul {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin: 5px 0;
+    }
+
+    header ul li {
+      list-style: none;
+      background-color: rgb(0, 150, 0);
+      border-radius: 6px;
+      padding: 2px;
+      font-size: 105%;
+    }
+
+    form {
+      border: 1px black solid;
+      background-color: white;
+      margin: 7px;
+      padding: 4px 2px;
+    }
+
+    form input,
+    form select,
+    form button {
+      height: 28px;
+    }
+
+    .form-group-row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .form-group {
+      display: inline-flex;
+      flex-direction: column;
+    }
+
+    .form-group-row>.form-group {
+      flex-shrink: 1;
+    }
+
+    .form-group-row>.form-group.greater,
+    .form-group-row.equal-size-items>.form-group {
+      flex-grow: 1;
+    }
+
+    ul {
+      padding: 0;
+    }
+
+    ul li {
+      list-style: none;
+    }
+
+    .pessoa {
+      border: 1px black solid;
+      border-radius: 1rem;
+      padding: 0 0 0 5px;
+      margin: 1rem;
+    }
+
+    .pessoa span.data-de-nascimento {
+      white-space: nowrap;
+    }
+
+    .pessoa p {
+      margin: 0;
+    }
+
+    #aviso-erro {
+      color: #ec0000;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    #pesquisa-form p {
+      margin: 0;
+      font-size: 90%;
+    }
+  </style>
+  <title>Programa de cadastro</title>
+</head>
+
+<body>
+  <header>
+    <ul>
+      <li>Pesquisar</li>
+      <li>Cadastrar</li>
+    </ul>
+  </header>
+  <form id="pesquisa-form" role="search" style="display: none;">
+    <select id="pesquisa-index" required>
+      <option>Nome</option>
+      <option>Email</option>
+    </select>
+    <input id="pesquisa-input" required>
+    <button id="pesquisa">Pesquisar</button>
+    <br>
+    <p>As maiúsculas e as minúsculas são diferenciadas na pesquisa.</p>
+  </form>
+
+  <form id="cadastro-form">
+    <div class="form-group-row">
+      <div class="form-group greater">
+        <label for="nome-completo">Nome completo:</label>
+        <input name="nome-completo" id="nome-completo" required>
+      </div>
+
+      <div class="form-group">
+        <label for="nascimento">Data de nascimento:</label>
+        <input name="nascimento" id="nascimento" type="date" required>
+      </div>
+    </div><br>
+
+    <div class="form-group">
+      <label for="sexo">Sexo:</label>
+      <select id="sexo" required>
+        <option style="display: none">Escolha</option>
+        <option>Masculino</option>
+        <option>Feminino</option>
+      </select>
+    </div><br>
+
+    <div class="form-group-row equal-size-items">
+      <div class="form-group">
+        <label for="filiacao1">Filiação 1:</label>
+        <input name="filiacao1" id="filiacao1" required>
+      </div>
+
+      <div class="form-group">
+        <label for="filiacao2">Filiação 2:</label>
+        <input name="filiacao2" id="filiacao2">
+      </div>
+    </div><br>
+
+    <div class="form-group">
+      <label for="cor-raca">Cor/Raça:</label>
+      <select id="cor-raca" required>
+        <option style="display: none;">Escolha</option>
+        <option>Branca</option>
+        <option>Parda</option>
+        <option>Preta</option>
+        <option>Amarela</option>
+        <option>Indígena</option>
+      </select>
+    </div>
+
+
+    <div class="form-group">
+      <label for="nacionalidade">Nacionalidade:</label>
+      <select id="nacionalidade" required>
+        <option style="display: none;">Escolha</option>
+        <option>Brasileiro</option>
+        <option>Estrangeiro</option>
+      </select>
+    </div>
+
+
+    <div class="form-group-row" style="align-items: flex-end;">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input name="email" id="email">
+      </div>
+      <button type="submit">Enviar</button>
+    </div>
+    <p id="aviso-erro"></p>
+  </form>
+
+  <div id="pessoas-cadastradas">
+    <ul></ul>
+  </div>
+  <button id="mostrar">Mostrar todas as pessoas cadastradas.</button>
+  <script src="main.js"></script>
+
+</body>
+
+</html>
