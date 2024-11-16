@@ -66,7 +66,8 @@ mostrarCadastradosBtn.addEventListener('click', function () {
     worker.postMessage({ tipo: "mostrar cadastrados" });
 })
 pesquisarBtn.addEventListener('click', function (event) {
-    const index = document.querySelector("#pesquisa-form select").value;
+    event.preventDefault();
+    const index = document.querySelector("#pesquisa-form select").value.toLowerCase();
     const query = document.querySelector("#pesquisa-form input").value;
     worker.postMessage({ tipo: "pesquisar", query: query, index: index });
 })
