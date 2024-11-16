@@ -10,7 +10,6 @@ let emailDuplicado = false;
 request.onupgradeneeded = (event) => {
     // atribui o banco de dados à variável
     db = event.target.result;
-    db = indexedDB.open("pessoas").result;
     console.log("Banco de dados criado:", db);
     const objectStore = db.createObjectStore("cadastrados", { keyPath: "email" });
     objectStore.createIndex("nome", "nome", { unique: false });
