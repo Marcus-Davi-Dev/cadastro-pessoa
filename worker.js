@@ -98,8 +98,6 @@ onmessage = (e) => {
         const value = data.query;
         const objectStore = db.transaction(["cadastrados"]).objectStore("cadastrados");
         const index = objectStore.index(data.index);
-        data.pessoasCadastradasElement.innerHTML = "";
-        data.pessoasCadastradasElement.style.display = "block";
         index.openCursor(IDBKeyRange.lowerBound(value)).onsuccess = (event) => {
             const cursor = event.target.result;
             if (cursor) {
