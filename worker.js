@@ -36,28 +36,6 @@ request.onupgradeneeded = (event) => {
     }
 })()
 
-/**
- * Cria um elemento com base nos parâmetros e retorna ele. 
- * 
- * @param {string} nome nome completo da pessoa
- * @param {string} dataDeNascimento data de nascimento como uma string formatada. Ex.: 25-07-2010
- * @param {string} sexo Masculino ou Feminino
- * @param {string} nacionalidade onde a pessoa nasceu
- * @param {string} email email da pessoa. Ex.: email@gmail.com
-*/
-function criarPessoa(nome, dataDeNascimento, sexo, nacionalidade, email) {
-    const pessoa = document.createElement("li");
-    const container = document.createElement("div");
-    container.classList.add("pessoa");
-    container.innerHTML = `<b>${nome}</b> <span class='data-de-nascimento'>${dataDeNascimento}</span><br>
-                           <p>Sexo: ${sexo}</p>
-                           <p>Nacionalidade: ${nacionalidade}</p>
-                           <p>${email}</p>
-                           <button>Excluir cadastro</button>`;
-    pessoa.appendChild(container);
-    return pessoa;
-}
-
 onmessage = (e) => {
     const data = e.data;
     // como este worker vai tratar de cadastrar, excluir (descadastrar?), mostrar cadastrados e pesquisar pessoas eu usaria um
@@ -101,7 +79,7 @@ onmessage = (e) => {
         index.openCursor().onsuccess = (event) => {
             const cursor = event.target.result;
             if (cursor) {
-                listaCadastrados.push(criarPessoa(cursor.value.nome, cursor.value.dataDeNascimento, cursor.value.sexo, cursor.value.nacionalidade, cursor.value.email));
+                listaCadastrados.push({nome: cursor.value.nome, dataDeNascimento: cursor.value.dataDeNascimento, sexo: cursor.value.sexo, nacionalidade: cursor.value.nacionalidade, email: cursor.value.email});
                 cadastrados++;
                 cursor.continue();
             } else {
@@ -125,7 +103,7 @@ onmessage = (e) => {
         index.openCursor(IDBKeyRange.lowerBound(value)).onsuccess = (event) => {
             const cursor = event.target.result;
             if (cursor) {
-                listaResultados.push(criarPessoa(cursor.value.nome, cursor.value.dataDeNascimento, cursor.value.sexo, cursor.value.nacionalidade, cursor.value.email));
+                listaResultados.push({nome: cursor.value.nome, dataDeNascimento: cursor.value.dataDeNascimento, sexo: cursor.value.sexo, nacionalidade: cursor.value.nacionalidade, email: cursor.value.email});
                 resultados++;
                 cursor.continue();
             } else {
