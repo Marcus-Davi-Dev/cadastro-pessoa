@@ -51,7 +51,7 @@ onmessage = (e) => {
             let cursor = event.target.result;
             if (cursor) {
                 // caso exista ativa uma flag
-                if (cursor.value.email === email.value) {
+                if (cursor.value.email === email) {
                     emailDuplicado = true;
                 }
                 cursor.continue();
